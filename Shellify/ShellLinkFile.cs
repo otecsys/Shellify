@@ -220,8 +220,12 @@ namespace Shellify
 		public void SaveAs(string filename)
 		{
 			using var stream = new FileStream(filename, FileMode.Create);
-			using var binaryWriter = new BinaryWriter(stream);
+			SaveAs(stream);
+		}
 
+		public void SaveAs(Stream stream)
+		{
+			using var binaryWriter = new BinaryWriter(stream);
 			var writer = new ShellLinkFileHandler(this);
 			writer.WriteTo(binaryWriter);
 		}
